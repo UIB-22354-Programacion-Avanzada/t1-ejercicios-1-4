@@ -1,0 +1,42 @@
+# .github/workflows/pruebas.yml
+name: pruebas
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - '.gitignore'
+  pull_request:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+      - '.gitignore'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+
+      # El esqueleto tiene que compilar SIEMPRE, aquí y en tu copia. Si esto falla,
+      # la construcción se rompe: es el único fallo que no se espera de la plantilla.
+      - name: Compilar
+        run: mvn --batch-mode test-compile
+
+      # En TU copia, el resultado de las pruebas es el indicador de cómo vas: empiezas
+      # con casi todo en rojo y terminas en verde. Por eso aquí sí rompe la construcción.
+      - name: Pruebas
+        if: github.repository != 'UIB-22354-Programacion-Avanzada/t1-ejercicios-1-4'
+        run: mvn --batch-mode test
+
+      # En el repositorio plantilla las pruebas fallan a propósito, porque nadie ha
+      # resuelto los ejercicios. Se ejecutan para ver el informe, pero no rompen nada.
+      - name: Pruebas (plantilla sin resolver; se informa y no rompe)
+        if: github.repository == 'UIB-22354-Programacion-Avanzada/t1-ejercicios-1-4'
+        run: mvn --batch-mode test -Dmaven.test.failure.ignore=true
