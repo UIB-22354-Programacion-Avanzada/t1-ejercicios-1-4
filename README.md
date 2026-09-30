@@ -11,24 +11,36 @@ fallan: tu trabajo consiste en ponerlas en verde.
 
 ## Cómo empezar
 
-1. Pulsa **Use this template** → **Create a new repository** y créalo en **tu cuenta personal**.
-2. En tu copia, **Code** → **Codespaces** → **Create codespace on main**.
-3. En el terminal:
+Sea cual sea la vía, lo primero es lo mismo: pulsa **Use this template** →
+**Create a new repository** y créalo en **tu cuenta personal**. A partir de ahí tienes dos
+caminos, y **los dos valen igual**: es un proyecto Maven corriente.
+
+**En el navegador, con Codespaces.** No hay nada que instalar. En tu copia, **Code** →
+**Codespaces** → **Create codespace on main**. Se abre VS Code con el JDK 25 y Maven ya
+puestos. En el terminal:
 
 ```bash
 java -version    # debe empezar por: openjdk version "25
 mvn test         # verás fallos: es lo esperado al empezar
 ```
 
-> **Recuerda detener el Codespace** cuando termines (**Code → Codespaces → ⋯ → Stop codespace**):
-> mientras está encendido consume tu cuota mensual gratuita.
+> **Recuerda detener el Codespace** cuando termines (**Code → Codespaces → ⋯ → Stop
+> codespace**): mientras está encendido consume tu cuota mensual gratuita.
+
+**En tu ordenador, con IntelliJ IDEA o con VS Code.** Clona tu copia y abre el proyecto por
+su `pom.xml`: en IntelliJ, **File → Open** y selecciona el `pom.xml` (elige *Open as
+Project*); en VS Code, abre la carpeta y deja que la extensión de Java la importe. Necesitas
+un **JDK 25**; IntelliJ puede descargarlo él mismo desde *File → Project Structure → SDK*.
+Maven viene incluido en IntelliJ, así que no hace falta instalarlo aparte.
 
 ## Un ejercicio, una clase de prueba
 
 Cada ejercicio se comprueba con una clase de prueba, y solo con esa. Para trabajar en uno,
-abre su clase de prueba y pulsa el botón ▶ que aparece junto al nombre de la clase: se
-ejecutan solo sus pruebas. El icono de matraz (*Testing*) de la barra lateral de VS Code las
-muestra todas en árbol.
+abre su clase de prueba y pulsa el botón de ejecutar que aparece junto al nombre de la
+clase: el ▶ en VS Code, la flecha verde del margen izquierdo en IntelliJ. Se ejecutan solo
+sus pruebas, y al lado de cada método aparece si pasó o falló. Para verlas todas en árbol,
+el icono de matraz (*Testing*) de la barra lateral en VS Code, o la ventana *Run* en
+IntelliJ.
 
 | Ejercicio | Clase de prueba |
 |---|---|
@@ -58,9 +70,10 @@ leerlo, ejecutarlo y, cuando el enunciado lo pida, modificarlo.
 
 ## Cómo leer el esqueleto
 
-Cada clase que tienes que escribir trae ya las **declaraciones**: las firmas de los métodos,
-la documentación y las cláusulas `extends` e `implements` que hacen falta para que el
-proyecto compile y las pruebas se puedan ejecutar desde el primer momento. Lo que falta son
+Cada clase que tienes que escribir trae ya las **declaraciones** que necesita el ejercicio
+en el que aparece: las firmas de sus métodos, la documentación y las cláusulas `extends` e
+`implements` correspondientes, para que el proyecto compile y las pruebas se puedan ejecutar
+desde el primer momento. Lo que falta son
 los **cuerpos**, marcados con `// TODO 1.4.k` y un
 `throw new UnsupportedOperationException(...)`. **Borra ese `throw`** al implementar el
 método; mientras esté, la prueba correspondiente falla con ese mensaje, que además te dice a
